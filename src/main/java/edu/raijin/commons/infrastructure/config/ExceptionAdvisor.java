@@ -1,5 +1,7 @@
 package edu.raijin.commons.infrastructure.config;
 
+import static java.util.stream.Collectors.joining;
+import static java.util.stream.Collectors.toList;
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.http.HttpStatus.CONFLICT;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
@@ -8,7 +10,6 @@ import static org.springframework.http.HttpStatus.UNAUTHORIZED;
 
 import java.time.Instant;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -16,6 +17,7 @@ import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.InsufficientAuthenticationException;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -82,11 +84,11 @@ public class ExceptionAdvisor extends ResponseEntityExceptionHandler {
         List<String> errors = ex.getBindingResult()
                 .getFieldErrors()
                 .stream()
-                .map(s -> String.format("The field '%s' %s", s.getField(), s.getDefaultMessage()))
-                .collect(Collectors.toList());
+                .map(FieldError::getDefaultMessage)
+                .collect(toList());
 
-        ExceptionExtendedInfo info = new ExceptionExtendedInfo(
-                String.format("The object '%s' has validation errors.", ex.getObjectName()), Instant.now(), errors);
+        String errorsConcatenated = errors.stream().collect(joining(", "));
+        ExceptionExtendedInfo info = new ExceptionExtendedInfo(errorsConcatenated, Instant.now(), errors);
 
         return new ResponseEntity<>(info, HttpStatus.BAD_REQUEST);
     }
