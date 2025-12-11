@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class RegisteredUserEvent implements Serializable {
+public class UserEvent implements Serializable {
 
     private UUID id;
 
