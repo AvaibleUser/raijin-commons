@@ -1,4 +1,4 @@
-package edu.raijin.commons.infrastructure.adapter.messaging.event;
+package edu.raijin.commons.infrastructure.adapter.messaging.event.scrum;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
