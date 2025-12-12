@@ -22,5 +22,9 @@ public class UserEvent implements Serializable {
 
     private String email;
 
+    private String role;
+
+    private String color;
+
     private String code;
 }
