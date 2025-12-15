@@ -67,12 +67,12 @@ public class AuthConfig {
     }
 
     private AbstractAuthenticationToken convertJwtToAuthentication(Jwt jwt) {
-        long id = Long.parseLong(jwt.getSubject());
+        String id = jwt.getSubject();
         List<SimpleGrantedAuthority> authorities = jwt.getClaimAsStringList("permissions")
                 .stream()
                 .map(SimpleGrantedAuthority::new)
                 .toList();
 
-        return new JwtAuthenticationToken(jwt, authorities, String.valueOf(id));
+        return new JwtAuthenticationToken(jwt, authorities, id);
     }
 }

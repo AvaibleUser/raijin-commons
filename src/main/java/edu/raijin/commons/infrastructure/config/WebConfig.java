@@ -3,15 +3,16 @@ package edu.raijin.commons.infrastructure.config;
 import static org.springframework.data.web.config.EnableSpringDataWebSupport.PageSerializationMode.VIA_DTO;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.jspecify.annotations.Nullable;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.MethodParameter;
 import org.springframework.data.web.config.EnableSpringDataWebSupport;
-import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.jwt.Jwt;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.web.bind.support.WebDataBinderFactory;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
@@ -53,11 +54,15 @@ class CurrentUserArgumentResolver implements HandlerMethodArgumentResolver {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Class<?> dtoType = parameter.getParameterType();
 
+        String subject = switch (authentication) {
+            case JwtAuthenticationToken aat -> aat.getToken().getSubject();
+            default -> null;
+        };
         if (dtoType.equals(String.class)) {
-            return switch (authentication) {
-                case AnonymousAuthenticationToken aat when aat.getAuthorities() instanceof Jwt jwt -> jwt.getSubject();
-                default -> null;
-            };
+            return subject;
+        }
+        if (dtoType.equals(UUID.class)) {
+            return UUID.fromString(subject);
         }
         return null;
     }

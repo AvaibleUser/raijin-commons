@@ -40,7 +40,6 @@ dependencies {
 	compileOnly("org.projectlombok:lombok")
 	annotationProcessor("org.projectlombok:lombok")
 	testImplementation("org.springframework.boot:spring-boot-data-jpa-test")
-	testImplementation("org.springframework.boot:spring-boot-security-oauth2-resource-server-test")
 	testImplementation("org.springframework.boot:spring-boot-security-test")
 	testImplementation("org.springframework.boot:spring-boot-webmvc-test")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
