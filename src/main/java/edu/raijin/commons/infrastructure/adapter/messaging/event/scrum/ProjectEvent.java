@@ -1,6 +1,5 @@
 package edu.raijin.commons.infrastructure.adapter.messaging.event.scrum;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.UUID;
 
@@ -14,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProjectEvent implements Serializable {
+public class ProjectEvent {
 
     private UUID id;
 

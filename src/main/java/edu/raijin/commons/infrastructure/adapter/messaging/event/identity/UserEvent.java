@@ -1,6 +1,5 @@
 package edu.raijin.commons.infrastructure.adapter.messaging.event.identity;
 
-import java.io.Serializable;
 import java.util.UUID;
 
 import lombok.AllArgsConstructor;
@@ -12,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserEvent implements Serializable {
+public class UserEvent {
 
     private UUID id;
 
