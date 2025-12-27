@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ContractEvent {
 
-    private Long id;
+    private UUID id;
 
     private UUID employeeId;
 
