@@ -21,8 +21,6 @@ public class BonusEvent {
 
     private BigDecimal amount;
 
-    private BigDecimal oldAmount;
-
     private String reason;
 
     private LocalDate transactionDate;
