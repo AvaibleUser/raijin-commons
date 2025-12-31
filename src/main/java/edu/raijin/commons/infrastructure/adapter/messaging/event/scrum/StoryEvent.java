@@ -3,6 +3,7 @@ package edu.raijin.commons.infrastructure.adapter.messaging.event.scrum;
 import java.util.UUID;
 
 import edu.raijin.commons.domain.type.StoryPriority;
+import edu.raijin.commons.infrastructure.adapter.messaging.event.shared.Audit;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -33,4 +34,6 @@ public class StoryEvent {
     private StoryPriority priority;
 
     private String stage;
+
+    private Audit audit;
 }

@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.UUID;
 
 import edu.raijin.commons.domain.type.SprintStatus;
+import edu.raijin.commons.infrastructure.adapter.messaging.event.shared.Audit;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -29,4 +30,6 @@ public class SprintEvent {
 
     @Builder.Default
     private SprintStatus status = SprintStatus.PENDING;
+
+    private Audit audit;
 }

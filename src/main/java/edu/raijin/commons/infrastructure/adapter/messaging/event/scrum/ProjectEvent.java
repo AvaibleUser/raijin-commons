@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.UUID;
 
 import edu.raijin.commons.domain.type.ProjectStatus;
+import edu.raijin.commons.infrastructure.adapter.messaging.event.shared.Audit;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -28,4 +29,6 @@ public class ProjectEvent {
 
     @Builder.Default
     private BigDecimal monthlyIncome = BigDecimal.ZERO;
+
+    private Audit audit;
 }
